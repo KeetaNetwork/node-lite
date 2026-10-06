@@ -1,0 +1,10 @@
+/dist
+/node_modules
+/**/*FROM_NODE*
+/.did-copy-node-tests
+/keetanetwork-keetanet-node-lite-*.tgz
+
+# Copied from Client bundle (already built files)
+/src/**/*.d.ts
+/src/lib/log/target_*.js
+/src/lib/utils/external-keys/
