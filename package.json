@@ -7,14 +7,19 @@
 	"type": "commonjs",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"bin": {
+		"keetanet-node-lite": "./dist/main.js"
+	},
 	"files": [
 		"dist/**/*.js",
-		"dist/**/*.d.ts"
+		"dist/**/*.d.ts",
+		"README.md"
 	],
 	"scripts": {
 		"build": "make dist",
 		"clean": "make clean",
 		"eslint": "eslint",
+		"start": "node dist/main.js",
 		"test": "make test"
 	},
 	"dependencies": {
