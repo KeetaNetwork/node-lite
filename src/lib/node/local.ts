@@ -11,8 +11,10 @@ import type { NodeConfig } from './index';
 import { checkableGenerator } from '../utils/helper';
 import { P2PWebSocket, P2P_WEBSOCKET_MAX_PAYLOAD_BYTES } from '../p2p';
 import apiHandlers, { type APIRequest } from '../../api';
-import { toJSONSerializable } from '../utils/conversion';
+import { objectToBuffer } from '../utils/conversion';
+import type { ToJSONSerializableOptions } from '../utils/conversion';
 import { KeetaNetErrorBase } from '../error/base';
+import { API_BINARY_MEDIA_TYPE } from './common';
 
 export type LocalNodeConfig = Omit<NodeConfig, 'nodeOptions'> & {
 	bootstrap?: BootstrapConfig;
@@ -76,8 +78,21 @@ function paramStrings(params: ExpressRequest['params']): { [name: string]: strin
 	return(result);
 }
 
-function sendJSON(response: ExpressResponse, status: number, payload: unknown): void {
-	response.status(status).type('application/json').send(JSON.stringify(toJSONSerializable(payload, { addBinary: true })));
+function sendAPIResponse(
+	request: ExpressRequest,
+	response: ExpressResponse,
+	status: number,
+	payload: unknown
+): void {
+	response.vary('Accept');
+	let mediaType = 'application/json';
+	let serializerOptions: ToJSONSerializableOptions = { addBinary: true };
+	const accepted = request.accepts(['application/json', API_BINARY_MEDIA_TYPE]);
+	if (accepted === API_BINARY_MEDIA_TYPE) {
+		mediaType = API_BINARY_MEDIA_TYPE;
+		serializerOptions = { binaryOnly: true };
+	}
+	response.status(status).type(mediaType).send(objectToBuffer(payload, serializerOptions));
 }
 
 function errorBody(error: unknown): { status: number; body: ApiErrorResponse } {
@@ -165,16 +180,16 @@ class LocalNodeImpl extends Node {
 						? pathArgs
 						: [apiRequest.payload, ...pathArgs];
 					const result = await mapping.handler(apiRequest, ...args);
-					sendJSON(response, 200, result);
+					sendAPIResponse(request, response, 200, result);
 				})().catch((error: unknown) => {
 					next(error);
 				});
 			});
 		}
 
-		this.#app.use((error: unknown, _ignored_request: ExpressRequest, response: ExpressResponse, _ignored_next: NextFunction) => {
+		this.#app.use((error: unknown, request: ExpressRequest, response: ExpressResponse, _ignored_next: NextFunction) => {
 			const { status, body } = errorBody(error);
-			sendJSON(response, status, body);
+			sendAPIResponse(request, response, status, body);
 		});
 	}
 

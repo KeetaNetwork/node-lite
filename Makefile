@@ -108,7 +108,7 @@ dist: dist/.done
 	@touch dist
 
 test: dist
-	npx jest --config .jest.config.js $(KEETANET_TEST_EXTRA_ARGS)
+	npx vitest run --config ./.vitest.config.mjs $(KEETANET_TEST_EXTRA_ARGS)
 
 do-lint: node_modules
 	npm run eslint -- --config .eslint.config.mjs $(KEETANET_ESLINT_EXTRA_ARGS)

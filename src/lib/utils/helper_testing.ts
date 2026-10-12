@@ -290,17 +290,6 @@ export function caughtErrorCode(fn: () => unknown): unknown {
 	}
 }
 
-export const testMethod: (..._ignored_args: any[]) => any =
-	typeof (globalThis as { test?: typeof test }).test === 'function'
-		? (globalThis as { test: typeof test }).test.bind(globalThis)
-		: (..._ignored_args: any[]) => {
-			/* replaced by test harness when needed */
-		};
-
-export function getJestPuppeteerSetupFile(_ignored_skipDefaultOutput?: boolean): string {
-	return('');
-}
-
 type ClientHelperTesting = typeof import('@keetanetwork/keetanet-client/lib/utils/helper_testing');
 type HelperLocal = typeof import('./helper_testing');
 type NodeBoundHelper = 'createTestNode' | 'getVotesFromSingleNode';

@@ -3,6 +3,7 @@
 /**/*FROM_NODE*
 /.did-copy-node-tests
 /keetanetwork-keetanet-node-lite-*.tgz
+/.vitest.config.local.mjs
 
 # Copied from Client bundle (already built files)
 /src/**/*.d.ts

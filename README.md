@@ -50,7 +50,7 @@ node dist/main.js --host 127.0.0.1 --port 8080 --seed "$(openssl rand -hex 32)" 
 
 Point a KeetaNet client at the printed `api` URL (include the `/api` path, e.g. `http://127.0.0.1:8080/api`).
 
-Quick smoke check (valid route — there is no `/node/ledger/supply`):
+Quick smoke check:
 
 ```bash
 curl -sS http://127.0.0.1:8080/api/node/version
@@ -76,7 +76,7 @@ Stop with `Ctrl+C` / `SIGTERM`.
 
 ## `createTestNode` (tests)
 
-Programmatic helper for spinning up one or more in-memory representatives in Jest / Anchor-style suites:
+Programmatic helper for spinning up one or more in-memory representatives in Vitest / Anchor-style suites:
 
 ```ts
 import Account from '@keetanetwork/keetanet-node/dist/lib/account';

@@ -1,6 +1,6 @@
 {
 	"name": "@keetanetwork/keetanet-node-lite",
-	"version": "0.18.7",
+	"version": "0.18.8",
 	"description": "",
 	"license": "SEE LICENSE IN LICENSE",
 	"author": "",
@@ -20,10 +20,11 @@
 		"clean": "make clean",
 		"eslint": "eslint",
 		"start": "node dist/main.js",
-		"test": "make test"
+		"test": "make test",
+		"vitest": "vitest"
 	},
 	"dependencies": {
-		"@keetanetwork/keetanet-client": "0.18.7",
+		"@keetanetwork/keetanet-client": "0.18.8",
 		"asn1js": "2.4.0",
 		"bloom-filters": "3.0.2",
 		"express": "5.2.1",
@@ -35,18 +36,15 @@
 		"@google-cloud/logging": "11.2.0"
 	},
 	"devDependencies": {
-		"@jest/globals": "30.5.2",
 		"@keetanetwork/eslint-config-typescript": "1.4.8",
 		"@types/asn1js": "2.0.2",
 		"@types/elliptic": "6.4.18",
 		"@types/express": "5.0.6",
-		"@types/jest": "30.0.0",
-		"@types/node": "20.17.6",
+		"@types/node": "24.19.0",
 		"@types/uuid": "10.0.0",
 		"@types/ws": "8.18.2",
 		"eslint": "9.13.0",
-		"jest": "30.5.2",
-		"ts-jest": "29.4.14",
-		"typescript": "5.6.3"
+		"typescript": "5.6.3",
+		"vitest": "5.0.3"
 	}
 }

@@ -8,6 +8,7 @@ import { Permissions } from './permissions';
 import Vote from './vote';
 import Log from './log';
 import { KeetaNetError as Error } from './error';
+import * as Timing from './node/timing';
 import {
 	asn1,
 	ASN1CheckUtilities,
@@ -54,6 +55,7 @@ const KeetaNet: ClientLib = {
 	Node,
 	P2P,
 	Permissions,
+	Timing,
 	Stats,
 	Vote,
 	Utils: {

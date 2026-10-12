@@ -8,7 +8,7 @@ export const asn1: ClientASN1['asn1'] = _mod.asn1;
 export const ASN1CheckUtilities: ClientASN1['ASN1CheckUtilities'] = _mod.ASN1CheckUtilities;
 /*
  * Client ValidateASN1 is generic over Schema; constructing with a concrete schema
- * often hits TS2589 under ts-jest. Keep runtime from client; type as any for tests.
+ * often hits TS2589 under Vitest. Keep runtime from client; type as any for tests.
  */
 
 export const ValidateASN1: any = _mod.ValidateASN1;
